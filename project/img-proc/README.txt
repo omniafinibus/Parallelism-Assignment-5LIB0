@@ -1,0 +1,3 @@
+Each of these directories contains the files in vep_1 of that implementation.
+The directories will therefore contains e.g. Makefile, arm_img_proc, libimage, etc. (e.g. 2-data-parallel/arm_img_proc).
+There is no vep_1 directory, i.e. no 2-data-parallel/vep_1/...

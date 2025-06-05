@@ -1,0 +1,5 @@
+why does the partition timer run slower than the global timer?
+Could be several reasons. Dependant on the hardware, the divider which divides the global timer to the partition timer is higher than 1, or if the partition timers are standalone, they can be configure to run on their own.
+
+why are the partition timers of the two partitions the same?
+All partition timers are reset, and both partitions run the exact same code, thus if the partition timers frequencies are the same, it results in both timers being read at the same moments (in the program, since the timers are only run during execution)

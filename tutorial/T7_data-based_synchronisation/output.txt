@@ -1,0 +1,19 @@
+Used 36 KiB of memory for fifos in shared memory
+Start reading
+01 01: running on tile 1 partition 1
+01 02: running on tile 1 partition 2
+01 03: running on tile 1 partition 3
+02 01: running on tile 2 partition 1
+02 02: running on tile 2 partition 2
+00 01: running on tile 0 partition 1
+00 02: running on tile 0 partition 2
+00 03: running on tile 0 partition 3
+00 01: 3079/2817434195: &sync=0xB0009000 sync=0 waiting for flag
+02 02: 3079/2817446260: &sync=0xB0009000 sync=0
+02 02: 3079/2817528177: &sync=0xB0009000 sync=2
+00 01: 3079/2817554051: &sync=0xB0009000 sync=2 unlocked!
+02 02: 3079/2817651324: &sync=0xB0009000 sync=2
+
+would all embedded systems behave like this or is there a special property of the (memory in the) CompSOC platform that make this work?
+
+Although its a useful way of scheduling, its not smart to use this implantation of a while loop since it will still require computing power, a flag in the interrupt controller would be a better alternative. After a view at the implemented architecture, i couldn't identify such a controller.

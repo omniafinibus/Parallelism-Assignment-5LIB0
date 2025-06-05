@@ -1,0 +1,66 @@
+Used 36 KiB of memory for fifos in shared memory
+Start reading
+00 01: running on tile 0 partition 1
+00 02: running on tile 0 partition 2
+00 03: running on tile 0 partition 3
+01 01: running on tile 1 partition 1
+01 02: running on tile 1 partition 2
+01 03: running on tile 1 partition 3
+02 01: running on tile 2 partition 1
+02 02: running on tile 2 partition 2
+00 02: read a 1th time, took 33037 global cycles
+00 03: read a 1th time, took 25 global cycles
+00 02: read a 2th time, took 25 global cycles
+00 03: read a 2th time, took 25 global cycles
+00 02: read a 3th time, took 25 global cycles
+00 03: read a 3th time, took 25 global cycles
+00 02: read a 4th time, took 25 global cycles
+00 03: read a 4th time, took 25 global cycles
+00 02: read a 5th time, took 25 global cycles
+00 03: read a 5th time, took 25 global cycles
+00 02: read a 6th time, took 25 global cycles
+00 03: read a 6th time, took 25 global cycles
+00 02: read d 1th time, took 37 global cycles
+00 03: read d 1th time, took 36 global cycles
+00 02: read d 2th time, took 36 global cycles
+00 03: read d 2th time, took 35 global cycles
+00 02: read d 3th time, took 36 global cycles
+00 03: read d 3th time, took 35 global cycles
+00 02: read d 4th time, took 36 global cycles
+00 03: read d 4th time, took 35 global cycles
+00 02: read d 5th time, took 36 global cycles
+00 03: read d 5th time, took 35 global cycles
+00 02: read d 6th time, took 36 global cycles
+00 03: read d 6th time, took 35 global cycles
+00 02: read d 1th time (LMB), took 27 global cycles
+00 03: read d 1th time (LMB), took 27 global cycles
+00 02: read d 2th time (LMB), took 27 global cycles
+00 03: read d 2th time (LMB), took 27 global cycles
+00 02: read d 3th time (LMB), took 27 global cycles
+00 03: read d 3th time (LMB), took 27 global cycles
+00 03: read d 4th time (LMB), took 27 global cycles
+00 02: read d 4th time (LMB), took 27 global cycles
+00 02: read d 5th time (LMB), took 27 global cycles
+00 03: read d 5th time (LMB), took 27 global cycles
+00 03: read d 6th time (LMB), took 27 global cycles
+00 02: read d 6th time (LMB), took 27 global cycles
+00 02: read e 1th time (ring), took 35 global cycles
+00 03: read e 1th time (ring), took 38 global cycles
+00 03: read e 2th time (ring), took 36 global cycles
+00 02: read e 2th time (ring), took 35 global cycles
+00 02: read e 3th time (ring), took 35 global cycles
+00 03: read e 3th time (ring), took 36 global cycles
+00 03: read e 4th time (ring), took 36 global cycles
+00 02: read e 4th time (ring), took 35 global cycles
+00 02: read e 5th time (ring), took 35 global cycles
+00 03: read e 5th time (ring), took 36 global cycles
+00 03: read e 6th time (ring), took 36 global cycles
+00 02: read e 6th time (ring), took 35 global cycles
+
+did you subtract the time that it takes to read the timer?
+Yes, the global timer was read just before reading the variables and directly afters, all printing and unrelated actions were taking outside these 2 timer reads.
+
+can you explain any variation in access times?
+- Reading from the ring contains an additional step of communicating with the tile memory controller, resulting in a longer read time
+- Reading from the LMB in partition 2 directly retrieves from the local memory, hence it is equal with reading a local variable (I assume its 2 cycles extra due to the pointer operation)
+- Reading from the LMB in partition 3 is the same as reading from the ring, since the address is not local to that partition

@@ -1,0 +1,26 @@
+##
+## memory and stack allocation for each partition
+## - on each tile the system application takes the first 32 KiB
+## - allocate 32KiB or 64KiB per partition, with a max of 128KiB per tile
+##
+on tile 1 partition 1 has 8KiB stack in 32KiB memory starting at 32KiB
+##
+## shared memory allocation for this vep
+## - the starting addresses are RELATIVE to the start of the shared memory
+## - you can use decimal or hex, KiB=1024
+## - size & address must use the same format (hex/dec)
+## - use /opt/riscv/bin/riscv32-unknown-elf-size [-A] *.elf
+##   in the partition directory to analyse its memory usage
+## - use shared_memories/vep_shared_memories.h to manage shared memories
+##
+#on tile 2 partition 2 shares 41KiB private memory
+#in shared memory memshared0 shares 92KiB private memory starting at 36KiB
+##
+## schedule for partitions that have a memory allocation
+## - the slot table length must be the same for all slots on a processor
+## - max 32 slots per tile
+## - a partition can have more than one slot
+## - slots are separated by VKERNEL slots of 2000 cycles
+## - system partition uses cycles 0-4999; hence first user slot starts at 7000
+##
+on tile 1 partition 1 has 58000 cycles of 67000 starting at  7000

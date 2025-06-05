@@ -1,0 +1,8 @@
+00 02: &d=0xB0009000 d=7 &a=0x00003B64 a=3 &b=0x00003B68 b=4 &c=0x00003B6C c=7
+00 03: &d=0xB0009000 d=70 &a=0x00003B64 a=30 &b=0x00003B68 b=40 &c=0x00003B6C c=70
+00 02: &d=0xB0009000 d=70 &a=0x00003B64 a=3 &b=0x00003B68 b=4 &c=0x00003B6C c=7
+00 03: &d=0xB0009000 d=70 &a=0x00003B64 a=30 &b=0x00003B68 b=40 &c=0x00003B6C c=70
+
+why are the addresses for d the same: Because d is located in the shared memory and thus the pointer in both partition 2 and 3 are pointing to the same address position.
+
+why are the values the same and/or different? Since partition 2 and 3 run in parallel, the latter printouts show the same value for d, since the last assignment of the shared data is the value 70 in partition 3. Before that the program first assigned the value from partition 2 only ot overwrite it with the value of partition 3, resulting in the first 2 printouts.

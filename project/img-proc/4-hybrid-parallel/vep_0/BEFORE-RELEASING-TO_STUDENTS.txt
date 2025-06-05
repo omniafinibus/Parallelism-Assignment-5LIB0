@@ -1,0 +1,7 @@
+# precompile libfifo-*, remove fifo.c, and modify the Makefile
+cd vep_0
+make
+rm -f libfifo-riscv/libsrc/* libfifo-riscv/Makefile.normal
+mv libfifo-riscv/Makefile.forstudents libfifo-riscv/Makefile
+rm -f libfifo-arm/libsrc/* libfifo-arm/Makefile.normal
+mv libfifo-arm/Makefile.forstudents libfifo-arm/Makefile

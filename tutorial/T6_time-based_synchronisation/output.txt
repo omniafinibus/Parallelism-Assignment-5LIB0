@@ -1,0 +1,24 @@
+Used 36 KiB of memory for fifos in shared memory
+Start reading
+01 01: running on tile 1 partition 1
+02 01: running on tile 2 partition 1
+02 02: running on tile 2 partition 2
+00 01: running on tile 0 partition 1
+00 02: running on tile 0 partition 2
+00 03: running on tile 0 partition 3
+01 02: running on tile 1 partition 2
+01 03: running on tile 1 partition 3
+00 01: 3068/2867647516: &sync=0xB0009000 sync=0 // a
+02 02: 3068/2867669516: &sync=0xB0009000 sync=0 // b
+00 01: 3068/2867716433: &sync=0xB0009000 sync=1 // c
+02 02: 3068/2867738433: &sync=0xB0009000 sync=2 // d
+00 01: 3068/2867856580: &sync=0xB0009000 sync=2 // e
+02 02: 3068/2867878580: &sync=0xB0009000 sync=2 // f
+
+
+why are the values for s the same and/or different? 
+sync is initialized to 0, which gives the reads a and b.
+During run time partition 1 is first to set sync to 1, afterwards it is overwritten by partition 2.
+Then there are no more writes, hence sync stays 2
+
+in that particular  order?
